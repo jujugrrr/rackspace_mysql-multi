@@ -8,101 +8,35 @@ See CHANGELOG.md for additional information about changes to this stack over tim
 ## Supported Platforms
 
 CentOS 6.5
+Ubuntu 12.04
 
 Requirements
 ------------
 #### Cookbooks
-* `phpstack` 
-* `elkstack` 
-* `java`
+* Look at metadata
 
 ## Attributes
 
-Please describe any attributes exposed by this stack, and what the default values are. There shouldn't be any attributes without a default value (e.g. no required attributes, sensible defaults).
-
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['rackspace_mysql-multi']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+default['holland']['enabled'] = true => deploy holland backup
+default['holland']['password'] = 'notagudpassword' => change it to the password oyu want
+default['holland']['cron']['day'] = '*' => every day
+default['holland']['cron']['hour'] = '3' => at 3am
+default['holland']['cron']['minute'] = '12' => and 12mins
 
 ## Usage
 
-### rackspace_mysql-multi::default
+### rackspace_mysql-multi::mysql_master
 
-This is where you should define what the default recipe does, if anything.
+Deploy a mysql master node
 
-### rackspace_mysql-multi::apollo
+### rackspace_mysql-multi::mysql_slave
 
-Apollo recipe installs apollo website on port 80 and 443 including certificates needed for that.
+Deploy a mysql slave node
 
-### rackspace_mysql-multi::elkstack
+### rackspace_mysql-multi::holland
 
-ELK Stack role used to deploy a single node with Elasticsearch, Logstash and Kibana interface for log aggregation.
+Deploy holland backup
 
-### rackspace_mysql-multi::merlin
-
-Merlin recipe installs merlin website on port 80 and 443 including certificates needed for that.
-
-
-Data_Bag
-----------
-
-This directory contains directories of the various data bags you create for your infrastructure. Each subdirectory corresponds to a data bag on the Chef Server, and contains JSON files of the items that go in the bag
-
-##### Create data bag directory
-
-First, create a directory for the data bag.
-
-`mkdir data_bags/secrets`
-
-Then create the JSON files for items that will go into that bag.
-
-`$EDITOR data_bags/secrets/newrelic.json`
-
-The JSON for the item must contain a key named "id" with a value equal to the item. For example,
-
-```json
-{
-  "id": "newrelic"
-}
-```
-
-##### Create encrypted_data_bag_secret  
-
-Create a random encryption key: `Openssl rand -base64 512 | tr -d '\r\n' > encrypted_data_bag_secret`
-For your chef clients to be able to decrypt the data bag copy over the secret key to the chef folder on the node
-
-##### Create Data Bag
-
-Use this secret_key to add items to a data bag during a create.  
-
-`knife data bag create --editor /usr/bin/vim --secret-file encrypted_data_bag_secret secrets newrelic`
-
-You may also use it when adding ITEMs from files,  
-
-`knife data bag create secrets`
-`knife data bag from file secrets data_bags/secrets/newrelic.json`
-
-
-Example:
-
-```json
-{  
-  "id": "newrelic",  
-  "license": "000000000000000000000",  
-  "apikey": "000000000000000000000"  
-}
-```
 
 
 ## Contributing
