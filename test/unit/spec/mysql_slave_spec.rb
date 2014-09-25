@@ -17,7 +17,7 @@ describe 'rackspace_mysql-multi::mysql_slave' do
   context 'Holland is disabled' do
     let(:chef_run) do
       ChefSpec::Runner.new(CENTOS_OPTS) do |node|
-        node.set['holland']['enabled'] = false
+        node.set['rackspace_mysql-multi']['holland']['enabled'] = false
       end.converge(described_recipe)
     end
     it 'doesn\'t include holland recipe' do

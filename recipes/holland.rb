@@ -15,7 +15,7 @@ mysql_database_user 'holland' do
   username: 'root',
   password: node['mysql']['server_root_password']
   )
-  password node['holland']['password']
+  password node['rackspace_mysql-multi']['holland']['password']
   host 'localhost'
   privileges [:usage, :select, :'lock tables', :'show view', :reload, :super, :'replication client']
   retries 2
@@ -59,7 +59,7 @@ if node.run_context.loaded_recipe?('rackspace_mysql-multi::mysql_slave')
     mode 0644
     variables(
       backup_user: 'holland',
-      backup_password: node['holland']['password'],
+      backup_password: node['rackspace_mysql-multi']['holland']['password'],
       role: 'slave'
     )
   end
@@ -71,7 +71,7 @@ else
     mode 0644
     variables(
       backup_user: 'holland',
-      backup_password: node['holland']['password'],
+      backup_password: node['rackspace_mysql-multi']['holland']['password'],
       role: 'master'
     )
   end
@@ -79,9 +79,9 @@ end
 
 # set cronjob
 cron 'backup' do
-  hour node['holland']['cron']['hour']
-  minute node['holland']['cron']['minute']
-  day node['holland']['cron']['day']
+  hour node['rackspace_mysql-multi']['holland']['cron']['hour']
+  minute node['rackspace_mysql-multi']['holland']['cron']['minute']
+  day node['rackspace_mysql-multi']['holland']['cron']['day']
   command '/usr/sbin/holland bk'
   action :create
 end

@@ -6,4 +6,4 @@
 # Copyright 2014, Rackspace
 #
 include_recipe 'mysql-multi::mysql_master'
-include_recipe 'rackspace_mysql-multi::holland' if node['holland']['enabled']
+include_recipe 'rackspace_mysql-multi::holland' if node['rackspace_mysql-multi']['holland']['enabled']

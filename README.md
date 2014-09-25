@@ -17,11 +17,11 @@ Requirements
 
 ## Attributes
 
-default['holland']['enabled'] = true => deploy holland backup
-default['holland']['password'] = 'notagudpassword' => change it to the password oyu want
-default['holland']['cron']['day'] = '*' => every day
-default['holland']['cron']['hour'] = '3' => at 3am
-default['holland']['cron']['minute'] = '12' => and 12mins
+default['rackspace_mysql-multi']['holland']['enabled'] = true => deploy holland backup
+default['rackspace_mysql-multi']['holland']['password'] = 'notagudpassword' => change it to the password oyu want
+default['rackspace_mysql-multi']['holland']['cron']['day'] = '*' => every day
+default['rackspace_mysql-multi']['holland']['cron']['hour'] = '3' => at 3am
+default['rackspace_mysql-multi']['holland']['cron']['minute'] = '12' => and 12mins
 
 ## Usage
 
