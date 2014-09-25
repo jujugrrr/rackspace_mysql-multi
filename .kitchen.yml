@@ -1,0 +1,38 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+  client_rb:
+    environment: _default
+  attributes:
+    openssh:
+      server:
+        password_authentication: 'yes'
+        permit_root_login: 'yes'
+    cloud:
+      public_ipv4: '127.0.0.1'
+    authorization:
+      sudo:
+        users: ['vagrant']
+        passwordless: true
+    platformstack:
+      cloud_backup:
+        enabled: false
+      omnibus_updater:
+        enabled: false
+      iptables:
+        allow_ssh_from_world: true
+
+platforms:
+  - name: centos-6.5
+    run_list:
+    - recipe[yum]
+suites:
+  - name: mysql_master
+    run_list:
+      - recipe[rackspace_mysql-multi::mysql_master]
+  - name: mysql_slave
+    run_list:
+      - recipe[rackspace_mysql-multi::mysql_slave]
