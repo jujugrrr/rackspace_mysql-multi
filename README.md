@@ -1,5 +1,7 @@
 # rackspace_mysql-multi
 
+Wrapper for mysql-multi.
+
 
 ## [Changelog](CHANGELOG.md)
 
@@ -17,8 +19,12 @@ Requirements
 
 ## Attributes
 
+### mysql-multi
+All the attributes from mysql-multi, you should change `default['mysql']['server_root_password']`
+
+### rackspace_mysql-multi::holland
 default['rackspace_mysql-multi']['holland']['enabled'] = true => deploy holland backup
-default['rackspace_mysql-multi']['holland']['password'] = 'notagudpassword' => change it to the password oyu want
+default['rackspace_mysql-multi']['holland']['password'] = 'notagudpassword' => change it to the password you want
 default['rackspace_mysql-multi']['holland']['cron']['day'] = '*' => every day
 default['rackspace_mysql-multi']['holland']['cron']['hour'] = '3' => at 3am
 default['rackspace_mysql-multi']['holland']['cron']['minute'] = '12' => and 12mins

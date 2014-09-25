@@ -2,8 +2,16 @@
 
 require_relative 'spec_helper'
 
-describe service('mysqld') do
-  it { should be_enabled }
+if os[:family] == 'RedHat'
+  describe service('mysqld') do
+    it { should be_enabled }
+    it { should be_running }
+  end
+else
+  describe service('mysql') do
+    it { should be_enabled }
+    it { should be_running }
+  end
 end
 
 describe port(3306) do
